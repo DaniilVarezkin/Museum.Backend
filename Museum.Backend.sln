@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{120479C0-BB4F-4525-A517-9A72C05CCC5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{742AA370-5EE6-4605-AB06-89B350678BFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1E45CA3D-2F2D-4308-9FC2-4B9E196C4C7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Museum.Domain", "Museum.Domain\Museum.Domain.csproj", "{F612A3B8-A062-4A73-8233-76E764616307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Museum.Application", "Museum.Application\Museum.Application.csproj", "{8DED4BB1-F3B1-4281-A6CF-171CB5A6EA55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Museum.Persistence", "Museum.Persistence\Museum.Persistence.csproj", "{E7E473D2-0F84-47F1-99A6-549C3B238388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Museum.WebApp", "Museum.WebApp\Museum.WebApp.csproj", "{B37FB309-6925-47FF-8D27-E6C449B37C36}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F612A3B8-A062-4A73-8233-76E764616307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F612A3B8-A062-4A73-8233-76E764616307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F612A3B8-A062-4A73-8233-76E764616307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F612A3B8-A062-4A73-8233-76E764616307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DED4BB1-F3B1-4281-A6CF-171CB5A6EA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DED4BB1-F3B1-4281-A6CF-171CB5A6EA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DED4BB1-F3B1-4281-A6CF-171CB5A6EA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DED4BB1-F3B1-4281-A6CF-171CB5A6EA55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E473D2-0F84-47F1-99A6-549C3B238388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E473D2-0F84-47F1-99A6-549C3B238388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E473D2-0F84-47F1-99A6-549C3B238388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E473D2-0F84-47F1-99A6-549C3B238388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37FB309-6925-47FF-8D27-E6C449B37C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37FB309-6925-47FF-8D27-E6C449B37C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37FB309-6925-47FF-8D27-E6C449B37C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37FB309-6925-47FF-8D27-E6C449B37C36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F612A3B8-A062-4A73-8233-76E764616307} = {120479C0-BB4F-4525-A517-9A72C05CCC5B}
+		{8DED4BB1-F3B1-4281-A6CF-171CB5A6EA55} = {120479C0-BB4F-4525-A517-9A72C05CCC5B}
+		{E7E473D2-0F84-47F1-99A6-549C3B238388} = {742AA370-5EE6-4605-AB06-89B350678BFD}
+		{B37FB309-6925-47FF-8D27-E6C449B37C36} = {1E45CA3D-2F2D-4308-9FC2-4B9E196C4C7A}
+	EndGlobalSection
+EndGlobal
