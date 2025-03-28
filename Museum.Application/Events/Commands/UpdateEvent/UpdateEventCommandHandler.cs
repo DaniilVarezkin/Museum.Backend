@@ -8,25 +8,25 @@ using Museum.Domain;
 
 namespace Museum.Application.MuseumServices.Commands.UpdateMuseumService
 {
-    public class UpdateMuseumServiceCommandHandler
-        : IRequestHandler<UpdateMuseumServiceCommand>
+    public class UpdateEventCommandHandler
+        : IRequestHandler<UpdateEventCommand>
     {
         private readonly IMuseumDbContext _dbContext;
 
-        public UpdateMuseumServiceCommandHandler(IMuseumDbContext dbCcontext) =>
+        public UpdateEventCommandHandler(IMuseumDbContext dbCcontext) =>
             _dbContext = dbCcontext;
 
-        public async Task Handle(UpdateMuseumServiceCommand request, 
+        public async Task Handle(UpdateEventCommand request, 
             CancellationToken cancellationToken)
         {
             var entity = 
-                await _dbContext.MuseumServices
+                await _dbContext.Events
                 .FirstOrDefaultAsync(service =>
                     service.Id == request.Id);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(MuseumService), request.Id);
+                throw new NotFoundException(nameof(Event), request.Id);
             }
 
             entity.Title = request.Title;

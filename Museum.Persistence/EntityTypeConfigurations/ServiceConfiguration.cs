@@ -9,9 +9,9 @@ using Museum.Domain;
 
 namespace Museum.Persistence.EntityTypeConfigurations
 {
-    public class ServiceConfiguration : IEntityTypeConfiguration<MuseumService>
+    public class ServiceConfiguration : IEntityTypeConfiguration<Event>
     {
-        public void Configure(EntityTypeBuilder<MuseumService> builder)
+        public void Configure(EntityTypeBuilder<Event> builder)
         {
             builder.HasKey(s => s.Id);
             builder.HasIndex(s => s.Id).IsUnique();

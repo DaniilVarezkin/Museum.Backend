@@ -8,7 +8,7 @@ namespace Museum.Persistence
 {
     public class MuseumDbContext : DbContext, IMuseumDbContext
     {
-        public DbSet<MuseumService> MuseumServices { get; set; }
+        public DbSet<Event> Events { get; set; }
         
         public MuseumDbContext(DbContextOptions<MuseumDbContext> options) 
             : base (options) { }

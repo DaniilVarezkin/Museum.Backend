@@ -4,7 +4,7 @@ using AutoMapper;
 
 namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceDetails
 {
-    public class MuseumServiceVm : IMapWith<MuseumService>
+    public class EventeVm : IMapWith<Event>
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -15,7 +15,7 @@ namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceDetails
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<MuseumService,  MuseumServiceVm>()
+            profile.CreateMap<Event,  EventeVm>()
                 .ForMember(vm => vm.Title, 
                     opt => opt.MapFrom(ms => ms.Title))
                 .ForMember(vm => vm.Description,

@@ -3,7 +3,7 @@
 
 namespace Museum.Application.MuseumServices.Commands.UpdateMuseumService
 {
-    public class UpdateMuseumServiceCommand : IRequest
+    public class UpdateEventCommand : IRequest
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;

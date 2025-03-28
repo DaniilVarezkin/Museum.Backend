@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceList
 {
-    public class MuseumServiceListVm
+    public class EventListVm
     {
-        public IList<MuseumServiceLookupDto> MuseumServices { get; set; }
+        public IList<EventLookupDto> MuseumServices { get; set; }
     }
 }

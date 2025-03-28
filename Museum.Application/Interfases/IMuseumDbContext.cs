@@ -5,7 +5,7 @@ namespace Museum.Application.Interfases
 {
     public interface IMuseumDbContext
     {
-        DbSet<MuseumService> MuseumServices { get; }
+        DbSet<Event> Events { get; }
         Task<int> saveChangesAsync(CancellationToken cancelationToken);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Museum.Domain
 {
-    public class MuseumService
+    public class Event
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;

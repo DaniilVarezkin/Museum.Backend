@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceList
 {
-    public class GetMuseumServiceListQuery : IRequest<MuseumServiceListVm>
+    public class GetEventListQuery : IRequest<EventListVm>
     {
     }
 }

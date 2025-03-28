@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceList
 {
-    public class MuseumServiceLookupDto : IMapWith<MuseumService>
+    public class EventLookupDto : IMapWith<Event>
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<MuseumService, MuseumServiceLookupDto>()
+            profile.CreateMap<Event, EventLookupDto>()
                 .ForMember(dto => dto.Id, 
                     opt => opt.MapFrom(ms => ms.Id))
                 .ForMember(dto => dto.Title,

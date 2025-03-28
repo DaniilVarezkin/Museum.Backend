@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceDetails
 {
-    public class GetMuseumServiceDetailsQuery : IRequest<MuseumServiceVm>
+    public class GetEventDetailsQuery : IRequest<EventeVm>
     {
         public Guid Id { get; set; }
     }

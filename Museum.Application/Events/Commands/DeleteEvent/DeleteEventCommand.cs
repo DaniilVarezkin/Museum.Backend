@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Museum.Application.MuseumServices.Commands.DeleteMuseumService
 {
-    public class DeleteMuseumServiceCommand : IRequest
+    public class DeleteEventCommand : IRequest
     {
         public Guid Id { get; set; }
     }

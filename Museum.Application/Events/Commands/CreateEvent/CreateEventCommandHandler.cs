@@ -4,18 +4,18 @@ using Museum.Domain;
 
 namespace Museum.Application.MuseumServices.Commands.CreateMuseumService
 {
-    public class CreateMuseumServiceCommandHandler
-        : IRequestHandler<CreateMuseumServiceCommand, Guid>
+    public class CreateEventCommandHandler
+        : IRequestHandler<CreateEventCommand, Guid>
     {
         private readonly IMuseumDbContext _dbCcontext;
 
-        public CreateMuseumServiceCommandHandler(IMuseumDbContext dbCcontext) =>
+        public CreateEventCommandHandler(IMuseumDbContext dbCcontext) =>
             _dbCcontext = dbCcontext;
 
-        public async Task<Guid> Handle(CreateMuseumServiceCommand request,
+        public async Task<Guid> Handle(CreateEventCommand request,
             CancellationToken cancellationToken)
         {
-            var museumService = new MuseumService
+            var museumService = new Event
             {
                 Id = Guid.NewGuid(),
                 Title = request.Title,
@@ -24,7 +24,7 @@ namespace Museum.Application.MuseumServices.Commands.CreateMuseumService
                 UpdatedDate = null,
             };
 
-            await _dbCcontext.MuseumServices.AddAsync(museumService);
+            await _dbCcontext.Events.AddAsync(museumService);
             await _dbCcontext.saveChangesAsync(cancellationToken);
             return museumService.Id;
         }

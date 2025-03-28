@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Museum.Application.MuseumServices.Commands.CreateMuseumService
 {
-    public class CreateMuseumServiceCommand : IRequest<Guid>
+    public class CreateEventCommand : IRequest<Guid>
     {
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
