@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Museum.Persistence", "Museum.Persistence\Museum.Persistence.csproj", "{E7E473D2-0F84-47F1-99A6-549C3B238388}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Museam.WebApi", "Museam.WebApi\Museam.WebApi.csproj", "{BE11DB71-C0E5-4DEC-BFEF-DCDB444C2A25}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F612A3B8-A062-4A73-8233-76E764616307} = {F612A3B8-A062-4A73-8233-76E764616307}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

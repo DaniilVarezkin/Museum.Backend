@@ -20,12 +20,15 @@ namespace Museum.Application.MuseumServices.Commands.CreateMuseumService
                 Id = Guid.NewGuid(),
                 Title = request.Title,
                 Description = request.Description,
+                Price = request.Price,
                 CreationDate = DateTime.Now,
                 UpdatedDate = null,
+                StartEventDate = request.StartEventDate,
+                EndEventDate = request.EndEventDate
             };
 
             await _dbCcontext.Events.AddAsync(museumService);
-            await _dbCcontext.saveChangesAsync(cancellationToken);
+            await _dbCcontext.SaveChangesAsync(cancellationToken);
             return museumService.Id;
         }
     }

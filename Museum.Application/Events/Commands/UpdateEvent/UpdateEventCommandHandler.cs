@@ -31,9 +31,12 @@ namespace Museum.Application.MuseumServices.Commands.UpdateMuseumService
 
             entity.Title = request.Title;
             entity.Description = request.Description;
+            entity.Price = request.Price;
             entity.UpdatedDate = DateTime.Now;
+            entity.StartEventDate = request.StartEventDate;
+            entity.EndEventDate = request.EndEventDate;
 
-            await _dbContext.saveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

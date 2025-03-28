@@ -8,6 +8,6 @@ namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceList
 {
     public class EventListVm
     {
-        public IList<EventLookupDto> MuseumServices { get; set; }
+        public IList<EventLookupDto> Events { get; set; }
     }
 }

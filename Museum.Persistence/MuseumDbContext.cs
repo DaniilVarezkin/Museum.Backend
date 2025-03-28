@@ -15,9 +15,8 @@ namespace Museum.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ServiceConfiguration());
+            modelBuilder.ApplyConfiguration(new EventConfiguration());
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

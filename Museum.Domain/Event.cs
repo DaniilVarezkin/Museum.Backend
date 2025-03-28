@@ -14,5 +14,7 @@ namespace Museum.Domain
         public decimal Price { get; set; }
         public DateTime CreationDate { get; set; } 
         public DateTime? UpdatedDate { get; set; }
+        public DateTime StartEventDate { get; set; }
+        public DateTime EndEventDate { get; set; }
     }
 }

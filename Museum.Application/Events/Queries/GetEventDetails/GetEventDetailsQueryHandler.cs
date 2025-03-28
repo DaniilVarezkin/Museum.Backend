@@ -8,7 +8,7 @@ using Museum.Domain;
 namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceDetails
 {
     public class GetEventDetailsQueryHandler
-        : IRequestHandler<GetEventDetailsQuery, EventeVm>
+        : IRequestHandler<GetEventDetailsQuery, EventVm>
     {
         private readonly IMuseumDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -16,7 +16,7 @@ namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceDetails
         public GetEventDetailsQueryHandler(IMuseumDbContext dbContext,
             IMapper mapper) => (_dbContext, _mapper) = (dbContext, mapper);
 
-        public async Task<EventeVm> Handle(
+        public async Task<EventVm> Handle(
             GetEventDetailsQuery request,
             CancellationToken cancellationToken)
         {
@@ -29,7 +29,7 @@ namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceDetails
                 throw new NotFoundException(nameof(Event), request.Id);
             }
 
-            return _mapper.Map<EventeVm>(entity);
+            return _mapper.Map<EventVm>(entity);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Museum.Application.MuseumServices.Commands.DeleteMuseumService
             }
 
             _dbContext.Events.Remove(entity);
-            await _dbContext.saveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

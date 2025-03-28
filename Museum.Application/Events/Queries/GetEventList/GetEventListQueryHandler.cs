@@ -24,7 +24,7 @@ namespace Museum.Application.MuseumServices.Queries.GetMuseumServiceList
                 .ProjectTo<EventLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return new EventListVm { MuseumServices = museumServicesQuery };
+            return new EventListVm { Events = museumServicesQuery };
         }
     }
 }

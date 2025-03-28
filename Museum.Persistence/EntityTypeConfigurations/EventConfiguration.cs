@@ -9,7 +9,7 @@ using Museum.Domain;
 
 namespace Museum.Persistence.EntityTypeConfigurations
 {
-    public class ServiceConfiguration : IEntityTypeConfiguration<Event>
+    public class EventConfiguration : IEntityTypeConfiguration<Event>
     {
         public void Configure(EntityTypeBuilder<Event> builder)
         {

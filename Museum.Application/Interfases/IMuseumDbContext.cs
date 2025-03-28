@@ -6,6 +6,6 @@ namespace Museum.Application.Interfases
     public interface IMuseumDbContext
     {
         DbSet<Event> Events { get; }
-        Task<int> saveChangesAsync(CancellationToken cancelationToken);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
