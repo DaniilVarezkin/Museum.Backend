@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain
+namespace Museum.Domain
 {
     public class EventPhoto
     {
