@@ -1,14 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Museum.Domain
 {
-    public class MuseumEventType
+    public enum MuseumEventType
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        [Description("Акция")]
+        Promotion,
+
+        [Description("Выставка")]
+        Exhibition,
+
+        [Description("Квест")]
+        Quest,
+
+        [Description("Лекция")]
+        Lecture,
+
+        [Description("Мастер-класс")]
+        MasterClass,
+
+        [Description("Музейное занятие")]
+        MuseumActivity,
+
+        [Description("Экскурсия")]
+        Tour
     }
 }
