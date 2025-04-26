@@ -11,8 +11,7 @@ namespace Museum.Application
             this IServiceCollection services)
         {
             services.AddMediatR(configuration =>
-                configuration.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
-            );
+                configuration.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
             return services;
         }
