@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Museum.Application.MuseumEvents.Commands.Common;
+using Museum.Application.MuseumEvents.Common;
 using Museum.Domain;
 
 namespace Museum.Application.MuseumEvents.Commands.CreateMuseumEvent

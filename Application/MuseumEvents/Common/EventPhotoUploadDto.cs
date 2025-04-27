@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Museum.Application.MuseumEvents.Commands.Common
+namespace Museum.Application.MuseumEvents.Common
 {
     public class EventPhotoUploadDto
     {

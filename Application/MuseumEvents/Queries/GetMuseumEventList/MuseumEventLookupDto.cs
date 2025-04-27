@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Museum.Application.Common.Mapping;
+using Museum.Application.MuseumEvents.Common;
 using Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails;
 using Museum.Domain;
 
@@ -14,7 +15,7 @@ namespace Museum.Application.MuseumEvents.Queries.GetMuseumEventList
         public DateTime? EndDate { get; set; }
         public AudienceType AudienceType { get; set; }
         public MuseumEventType EventType { get; set; }
-        public ICollection<EventPhoto> Photos { get; set; } = new List<EventPhoto>();
+        public ICollection<EventPhotoDto> Photos { get; set; } = new List<EventPhotoDto>();
 
         public void ConfigureMapping(Profile profile)
         {
@@ -34,7 +35,9 @@ namespace Museum.Application.MuseumEvents.Queries.GetMuseumEventList
                 .ForMember(eventDto => eventDto.EndDate, opt =>
                     opt.MapFrom(museumEvent => museumEvent.EndDate))
                 .ForMember(eventDto => eventDto.Photos, opt =>
-                    opt.MapFrom(museumEvent => museumEvent.Photos));
+                    opt.MapFrom(museumEvent => museumEvent.Photos.Select(photo => 
+                        new EventPhotoDto { FilePath = photo.FilePath}))
+                    );
         }
     }
 }

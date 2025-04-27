@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Museum.Application.MuseumEvents.Commands.Common;
 using Museum.Application.MuseumEvents.Commands.CreateMuseumEvent;
+using Museum.Application.MuseumEvents.Common;
 using Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails;
 using Museum.Application.MuseumEvents.Queries.GetMuseumEventList;
 using Museum.WebApi.Models;
 
 namespace Museum.WebApi.Controllers
 {
+    [Route("api/[controller]/[action]")]
     public class MuseumController : BaseController
     {
         private readonly IMapper _mapper;
@@ -37,7 +38,7 @@ namespace Museum.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateMuseumEventDto museumEventDto)
+        public async Task<IActionResult> Create([FromForm] CreateMuseumEventDto museumEventDto)
         {
             var command = _mapper.Map<CreateMuseumEventCommand>(museumEventDto);
 

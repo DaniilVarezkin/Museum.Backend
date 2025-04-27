@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace Museum.Persistense
     {
         public static void Initialize(MuseumDbContext context)
         {
-            context.Database.EnsureCreated();
+            //context.Database.EnsureCreated(); закоменчено так ка вызывается Migrate()
+            context.Database.Migrate();
+            //context.Database.EnsureDeleted();
         }
     }
 }

@@ -15,39 +15,53 @@ namespace Museum.Application.MuseumEvents.Commands.CreateMuseumEvent
         public async Task<Guid> Handle(CreateMuseumEventCommand command,
             CancellationToken cancellationToken)
         {
-            var museumEvent = new MuseumEvent
+            using (var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken))
             {
-                Name = command.Name,
-                Description = command.Description,
-                Annotation = command.Annotation,
-                AudienceType = command.AudienceType,
-                EventType = command.EventType,
-                StartDate = command.StartDate,
-                EndDate = command.EndDate,
-                TicketLink = command.TicketLink,
-            };
-
-            if(command.Photos != null && command.Photos.Any())
-            {
-                foreach(var photoDto in command.Photos)
+                try
                 {
-                    var filePath = await _fileService.UploadFileAsync(photoDto.Content, photoDto.Name, cancellationToken);
-                    if(filePath != null)
+                    var museumEvent = new MuseumEvent
                     {
-                        var eventPhoto = new EventPhoto
+                        Name = command.Name,
+                        Description = command.Description,
+                        Annotation = command.Annotation,
+                        AudienceType = command.AudienceType,
+                        EventType = command.EventType,
+                        StartDate = command.StartDate,
+                        EndDate = command.EndDate,
+                        TicketLink = command.TicketLink,
+                    };
+
+                    if (command.Photos != null && command.Photos.Any())
+                    {
+                        foreach (var photoDto in command.Photos)
                         {
-                            FilePath = filePath,
-                        };
-                        await _dbContext.EventsPhoto.AddAsync(eventPhoto, cancellationToken);
-                        museumEvent.Photos.Add(eventPhoto);
+                            var filePath = await _fileService.UploadFileAsync(photoDto.Content, photoDto.Name, cancellationToken);
+                            if (filePath != null)
+                            {
+                                var eventPhoto = new EventPhoto
+                                {
+                                    FilePath = filePath,
+                                    MuseumEvent = museumEvent,
+                                    MuseumEventId = museumEvent.Id,
+                                };
+                                await _dbContext.EventsPhoto.AddAsync(eventPhoto, cancellationToken);
+                                museumEvent.Photos.Add(eventPhoto);
+                            }
+                        }
                     }
+
+                    await _dbContext.Events.AddAsync(museumEvent, cancellationToken);
+
+                    await _dbContext.SaveChangesAsync(cancellationToken);
+                    await transaction.CommitAsync(cancellationToken);
+
+                    return museumEvent.Id;
+                } catch (Exception ex)
+                {
+                    await transaction.RollbackAsync(cancellationToken);
+                    throw;
                 }
             }
-
-            await _dbContext.Events.AddAsync(museumEvent, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return museumEvent.Id;
         }
     }
 }
