@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+#MyIgnorList
+/wwwroot/uploads/files
+
 # User-specific files
 *.rsuser
 *.suo
@@ -361,3 +364,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Museum.WebApi/wwwroot/uploads/files
