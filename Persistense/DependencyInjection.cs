@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Museum.Application.Interfaces;
+using Museum.Persistense.Services;
 
 namespace Museum.Persistense
 {
@@ -21,6 +22,11 @@ namespace Museum.Persistense
             services.AddScoped<IMuseumDbContext>(provider =>
                 provider.GetService<MuseumDbContext>()
             );
+
+            var uploadFilePath = configuration["PhotoSavingPath"];
+
+            services.AddScoped<IFileService>(provider =>
+                new FileService(uploadFilePath));
 
             return services;
         }

@@ -8,8 +8,9 @@ namespace Museum.Application.MuseumEvents.Commands.CreateMuseumEvent
         : IRequestHandler<CreateMuseumEventCommand, Guid>
     {
         private readonly IMuseumDbContext _dbContext;
-        public CreateMuseumEventCommandHandler(IMuseumDbContext dbContext) => 
-            _dbContext = dbContext;
+        private readonly IFileService _fileService;
+        public CreateMuseumEventCommandHandler(IMuseumDbContext dbContext, IFileService fileService) => 
+            (_dbContext, _fileService) = (dbContext, fileService);
 
         public async Task<Guid> Handle(CreateMuseumEventCommand command,
             CancellationToken cancellationToken)
@@ -24,8 +25,24 @@ namespace Museum.Application.MuseumEvents.Commands.CreateMuseumEvent
                 StartDate = command.StartDate,
                 EndDate = command.EndDate,
                 TicketLink = command.TicketLink,
-                Photos = command.Photos,
             };
+
+            if(command.Photos != null && command.Photos.Any())
+            {
+                foreach(var photoDto in command.Photos)
+                {
+                    var filePath = await _fileService.UploadFileAsync(photoDto.Content, photoDto.Name, cancellationToken);
+                    if(filePath != null)
+                    {
+                        var eventPhoto = new EventPhoto
+                        {
+                            FilePath = filePath,
+                        };
+                        await _dbContext.EventsPhoto.AddAsync(eventPhoto, cancellationToken);
+                        museumEvent.Photos.Add(eventPhoto);
+                    }
+                }
+            }
 
             await _dbContext.Events.AddAsync(museumEvent, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);

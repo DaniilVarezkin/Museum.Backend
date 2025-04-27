@@ -8,6 +8,7 @@ namespace Museum.Persistense
     public class MuseumDbContext : DbContext, IMuseumDbContext
     {
         public DbSet<MuseumEvent> Events { get; set; }
+        public DbSet<EventPhoto> EventsPhoto { get; set; }
 
         public MuseumDbContext(DbContextOptions<MuseumDbContext> options) 
             : base(options) { }
