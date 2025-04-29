@@ -20,7 +20,7 @@ namespace Museum.Persistense
             });
 
             services.AddScoped<IMuseumDbContext>(provider =>
-                provider.GetService<MuseumDbContext>()
+                provider.GetRequiredService<MuseumDbContext>()
             );
 
             var uploadFilePath = configuration["PhotoSavingPath"];

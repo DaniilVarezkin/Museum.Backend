@@ -8,7 +8,7 @@ namespace Museum.Application.Common.Exceptions
 {
     public class FileUploadException : Exception
     {
-        public FileUploadException(string filePath)
-            : base($"Failed to upload file: \"{filePath}\"") { }
+        public FileUploadException(string filePath, Exception ex)
+            : base($"Failed to upload file: \"{filePath}\"", ex) { }
     }
 }

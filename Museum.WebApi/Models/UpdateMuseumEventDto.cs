@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Museum.Application.Common.Mapping;
-using Museum.Application.MuseumEvents.Commands.CreateMuseumEvent;
 using Museum.Domain;
+using Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent;
 
 namespace Museum.WebApi.Models
 {
-    public class CreateMuseumEventDto : IMapWith<CreateMuseumEventCommand>
+    public class UpdateMuseumEventDto : IMapWith<UpdateMuseumEventCommand>
     {
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Annotation { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -15,11 +16,15 @@ namespace Museum.WebApi.Models
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string TicketLink { get; set; } = string.Empty;
-        public ICollection<IFormFile>? Photos { get; set; } = new List<IFormFile>();
+        public ICollection<IFormFile>? AddedPhotos { get; set; } = new List<IFormFile>();
+        public ICollection<Guid>? DeletedPhoto {  get; set; } = new List<Guid>();
+
 
         public void ConfigureMapping(Profile profile)
         {
-            profile.CreateMap<CreateMuseumEventDto, CreateMuseumEventCommand>()
+            profile.CreateMap<UpdateMuseumEventDto, UpdateMuseumEventCommand>()
+                .ForMember(command => command.Id, opt =>
+                    opt.MapFrom(dto => dto.Id))
                 .ForMember(command => command.Name, opt =>
                     opt.MapFrom(dto => dto.Name))
                 .ForMember(command => command.Annotation, opt =>
@@ -36,7 +41,9 @@ namespace Museum.WebApi.Models
                     opt.MapFrom(dto => dto.EndDate))
                 .ForMember(command => command.TicketLink, opt =>
                     opt.MapFrom(dto => dto.TicketLink))
-                .ForMember(command => command.Photos, opt =>
+                .ForMember(command => command.DeletedPhotos, opt =>
+                    opt.MapFrom(dto => dto.DeletedPhoto))
+                .ForMember(command => command.AddedPhotos, opt =>
                     opt.Ignore());
         }
     }

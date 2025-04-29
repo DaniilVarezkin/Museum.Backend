@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Museum.Application.MuseumEvents.Commands.CreateMuseumEvent;
+using Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent;
 using Museum.Application.MuseumEvents.Common;
 using Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails;
 using Museum.Application.MuseumEvents.Queries.GetMuseumEventList;
@@ -50,6 +51,22 @@ namespace Museum.WebApi.Controllers
             var result = await Mediator.Send(command);
 
             return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(
+            [FromForm] UpdateMuseumEventDto updateMuseumEventDto)
+        {
+            var command = _mapper.Map<UpdateMuseumEventCommand>(updateMuseumEventDto);
+
+            if(updateMuseumEventDto.AddedPhotos != null && updateMuseumEventDto.AddedPhotos.Any())
+            {
+                command.AddedPhotos = await ConvertPhotosAsync(updateMuseumEventDto.AddedPhotos);
+            }
+
+            await Mediator.Send(command);
+
+            return NoContent();
         }
 
 

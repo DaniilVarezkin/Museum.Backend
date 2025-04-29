@@ -8,6 +8,7 @@ namespace Museum.Application.MuseumEvents.Common
 {
     public class EventPhotoDto
     {
+        public Guid Id { get; set; }
         public required string FilePath {  get; set; }
     }
 }

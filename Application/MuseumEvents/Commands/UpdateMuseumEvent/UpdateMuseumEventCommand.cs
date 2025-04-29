@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Museum.Application.MuseumEvents.Common;
 using Museum.Domain;
 
 namespace Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent
@@ -14,6 +15,7 @@ namespace Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string TicketLink { get; set; } = string.Empty;
-        public ICollection<EventPhoto> Photos { get; set; } = new List<EventPhoto>();
+        public ICollection<EventPhotoUploadDto> AddedPhotos { get; set; } = new List<EventPhotoUploadDto>();
+        public ICollection<Guid> DeletedPhotos { get; set; } = new List<Guid>();
     }
 }
