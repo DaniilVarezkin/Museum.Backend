@@ -35,12 +35,7 @@ namespace Museum.Application.MuseumEvents.Queries.GetMuseumEventList
                 .ForMember(eventDto => eventDto.EndDate, opt =>
                     opt.MapFrom(museumEvent => museumEvent.EndDate))
                 .ForMember(eventDto => eventDto.Photos, opt =>
-                    opt.MapFrom(museumEvent => museumEvent.Photos.Select(photo => 
-                        new EventPhotoDto { 
-                            Id = photo.Id, 
-                            FilePath = photo.FilePath
-                        }))
-                    );
+                    opt.MapFrom(museumEvent => museumEvent.Photos));
         }
     }
 }

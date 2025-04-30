@@ -14,6 +14,6 @@ namespace Museum.Persistense
             //context.Database.EnsureCreated(); закоменчено так ка вызывается Migrate()
             context.Database.Migrate();
             //context.Database.EnsureDeleted();
-        }
+        } 
     }
 }

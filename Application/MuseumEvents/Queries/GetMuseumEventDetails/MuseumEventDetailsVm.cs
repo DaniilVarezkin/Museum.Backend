@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Museum.Application.Common.Mapping;
+using Museum.Application.MuseumEvents.Common;
 using Museum.Domain;
 
 namespace Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails
@@ -15,7 +16,7 @@ namespace Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string TicketLink { get; set; } = string.Empty;
-        public ICollection<EventPhoto> Photos { get; set; } = new List<EventPhoto>();
+        public ICollection<EventPhotoDto> Photos { get; set; } = new List<EventPhotoDto>();
 
         public void ConfigureMapping(Profile profile)
         {

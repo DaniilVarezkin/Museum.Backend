@@ -23,9 +23,10 @@ namespace Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails
         public async Task<MuseumEventDetailsVm> Handle(
             GetMuseumEventDetailsQuery query, CancellationToken cancellationToken)
         {
-            var museumEvent = await _dbContext.Events.FirstOrDefaultAsync(museumEvent => 
-                museumEvent.Id == query.Id,
-                cancellationToken);
+            var museumEvent = await _dbContext.Events.Include(museumEvent => museumEvent.Photos)
+                .FirstOrDefaultAsync(museumEvent => 
+                    museumEvent.Id == query.Id,
+                    cancellationToken);
 
             if (museumEvent == null)
             {

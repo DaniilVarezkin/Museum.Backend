@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Museum.Application.MuseumEvents.Commands.CreateMuseumEvent;
+using Museum.Application.MuseumEvents.Commands.DeleteMuseumEvent;
 using Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent;
 using Museum.Application.MuseumEvents.Common;
 using Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails;
@@ -64,6 +65,18 @@ namespace Museum.WebApi.Controllers
                 command.AddedPhotos = await ConvertPhotosAsync(updateMuseumEventDto.AddedPhotos);
             }
 
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            var command = new DeleteMuseumEventCommand
+            {
+                Id = Id
+            };
             await Mediator.Send(command);
 
             return NoContent();

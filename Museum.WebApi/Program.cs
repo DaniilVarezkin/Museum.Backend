@@ -19,6 +19,8 @@ builder.Services.AddApplication();
 builder.Services.AddPersistanse(builder.Configuration);
 builder.Services.AddControllers();
 
+
+
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy =>
     {
@@ -27,6 +29,8 @@ builder.Services.AddCors(options => {
         policy.AllowAnyOrigin();
     });
 });
+
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -47,7 +51,15 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.RoutePrefix = string.Empty;
+    options.SwaggerEndpoint("swagger/v1/swagger.json", "Museum API");
+});
 
 app.UseStaticFiles();
 
