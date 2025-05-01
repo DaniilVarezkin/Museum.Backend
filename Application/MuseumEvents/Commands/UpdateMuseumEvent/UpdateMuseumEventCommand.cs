@@ -16,6 +16,6 @@ namespace Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent
         public DateTime? EndDate { get; set; }
         public string TicketLink { get; set; } = string.Empty;
         public ICollection<EventPhotoUploadDto> AddedPhotos { get; set; } = new List<EventPhotoUploadDto>();
-        public ICollection<Guid> DeletedPhotos { get; set; } = new List<Guid>();
+        public ICollection<Guid> DeletedPhotosIds { get; set; } = new List<Guid>();
     }
 }

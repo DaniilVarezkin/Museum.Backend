@@ -40,10 +40,10 @@ namespace Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent
                     museumEvent.TicketLink = command.TicketLink;
 
                     //Тут логика удаления фото мероприятия
-                    if(command.DeletedPhotos != null && command.DeletedPhotos.Any())
+                    if(command.DeletedPhotosIds != null && command.DeletedPhotosIds.Any())
                     {
                         var photoToDelete = await _dbContext.EventsPhoto.Where(photo =>
-                            command.DeletedPhotos.Contains(photo.Id)).ToListAsync(cancellationToken);
+                            command.DeletedPhotosIds.Contains(photo.Id)).ToListAsync(cancellationToken);
 
                         if(photoToDelete != null && photoToDelete.Any()) 
                         {

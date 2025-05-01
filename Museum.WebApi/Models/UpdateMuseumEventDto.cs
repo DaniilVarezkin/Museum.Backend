@@ -41,7 +41,7 @@ namespace Museum.WebApi.Models
                     opt.MapFrom(dto => dto.EndDate))
                 .ForMember(command => command.TicketLink, opt =>
                     opt.MapFrom(dto => dto.TicketLink))
-                .ForMember(command => command.DeletedPhotos, opt =>
+                .ForMember(command => command.DeletedPhotosIds, opt =>
                     opt.MapFrom(dto => dto.DeletedPhoto))
                 .ForMember(command => command.AddedPhotos, opt =>
                     opt.Ignore());
