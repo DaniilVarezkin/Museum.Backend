@@ -4,6 +4,7 @@ using Museum.Application.Interfaces;
 using AutoMapper;
 using Museum.Application.Common.Mapping;
 using System.Reflection;
+using Museum.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
 }
+app.UseCustomExceptionHandler();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>

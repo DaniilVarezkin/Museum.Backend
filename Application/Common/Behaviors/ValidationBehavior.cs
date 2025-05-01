@@ -12,7 +12,7 @@ namespace Museum.Application.Common.Behaviors
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators) =>
             _validators = validators;
 
-        public async Task<TResponse> Handle(TRequest request,
+        public Task<TResponse> Handle(TRequest request,
             RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
@@ -29,7 +29,7 @@ namespace Museum.Application.Common.Behaviors
             {
                 throw new ValidationException(failures);
             }
-            return await next();
+            return next();
         }
     }
 }
