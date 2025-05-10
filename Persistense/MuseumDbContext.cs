@@ -9,6 +9,9 @@ namespace Museum.Persistense
     {
         public DbSet<MuseumEvent> Events { get; set; }
         public DbSet<EventPhoto> EventsPhoto { get; set; }
+        public DbSet<Souvenir> Souvenirs { get; set; }
+        public DbSet<SouvenirPhoto> SouvenirsPhoto { get; set; }
+
 
         public MuseumDbContext(DbContextOptions<MuseumDbContext> options) 
             : base(options) { }

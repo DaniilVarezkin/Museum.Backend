@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Museum.Application.Common.Mapping;
-using Museum.Application.MuseumEvents.Commands.CreateMuseumEvent;
+using Museum.Application.SQRS.MuseumEvents.Commands.CreateMuseumEvent;
 using Museum.Domain;
 
 namespace Museum.WebApi.Models

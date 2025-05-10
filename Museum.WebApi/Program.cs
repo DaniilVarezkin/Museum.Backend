@@ -5,6 +5,7 @@ using AutoMapper;
 using Museum.Application.Common.Mapping;
 using System.Reflection;
 using Museum.WebApi.Middleware;
+using Museum.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,15 @@ builder.Services.AddCors(options => {
     });
 });
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(config =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+    config.IncludeXmlComments(xmlPath);
+    config.IncludeXmlComments(@"D:\VSProjects\Museam.Backend\Domain\bin\Debug\net8.0\Museum.Domain.xml");
+});
 
 var app = builder.Build();
 

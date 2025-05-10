@@ -7,27 +7,44 @@ using System.Threading.Tasks;
 
 namespace Museum.Domain
 {
+    /// <summary>
+    /// Тип музейного мероприятия
+    /// </summary>
     public enum MuseumEventType
     {
-        [Description("Акция")]
+        /// <summary>
+        /// Акция
+        /// </summary>
         Promotion,
 
-        [Description("Выставка")]
+        /// <summary>
+        /// Выставка
+        /// </summary>
         Exhibition,
 
-        [Description("Квест")]
+        /// <summary>
+        /// Квест
+        /// </summary>
         Quest,
 
-        [Description("Лекция")]
+        /// <summary>
+        /// Лекция
+        /// </summary>
         Lecture,
 
-        [Description("Мастер-класс")]
+        /// <summary>
+        /// Мастер-класс
+        /// </summary>
         MasterClass,
 
-        [Description("Музейное занятие")]
+        /// <summary>
+        /// Музейное занятие
+        /// </summary>
         MuseumActivity,
 
-        [Description("Экскурсия")]
+        /// <summary>
+        /// Экскурсия
+        /// </summary>
         Tour
     }
 }

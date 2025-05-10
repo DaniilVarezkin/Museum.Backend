@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Museum.Application.Common.Mapping;
 using Museum.Domain;
-using Museum.Application.MuseumEvents.Commands.UpdateMuseumEvent;
+using Museum.Application.SQRS.MuseumEvents.Commands.UpdateMuseumEvent;
 
 namespace Museum.WebApi.Models
 {
@@ -14,7 +14,7 @@ namespace Museum.WebApi.Models
         public AudienceType AudienceType { get; set; }
         public MuseumEventType EventType { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime? EndDate { get; set; } = null;
         public string TicketLink { get; set; } = string.Empty;
         public ICollection<IFormFile>? AddedPhotos { get; set; } = new List<IFormFile>();
         public ICollection<Guid>? DeletedPhoto {  get; set; } = new List<Guid>();

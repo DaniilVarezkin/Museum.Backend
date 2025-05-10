@@ -10,6 +10,8 @@ namespace Museum.Application.Interfaces
         DatabaseFacade Database { get; }
         DbSet<MuseumEvent> Events { get; set; }
         DbSet<EventPhoto> EventsPhoto { get; set; }
+        DbSet<Souvenir> Souvenirs { get; set; }
+        DbSet<SouvenirPhoto> SouvenirsPhoto { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
