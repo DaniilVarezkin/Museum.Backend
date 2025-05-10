@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
-using Museum.Domain;
-using Museum.Application.MuseumEvents.Common;
+using Museum.Application.SQRS.MuseumEvents.Common;
 
 namespace Museum.Application.SQRS.MuseumEvents.Commands.CreateMuseumEvent
 {

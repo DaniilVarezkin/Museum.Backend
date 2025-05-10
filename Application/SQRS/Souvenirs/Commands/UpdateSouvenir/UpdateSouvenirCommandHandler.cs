@@ -22,7 +22,7 @@ namespace Museum.Application.SQRS.Souvenirs.Commands.UpdateSouvenir
             {
                 try
                 {
-                    var souvenir = await _dbContext.Souvenirs.FirstOrDefaultAsync(souvenir =>
+                    var souvenir = await _dbContext.Souvenirs.Include(s => s.Photo).FirstOrDefaultAsync(souvenir =>
                             souvenir.Id == command.Id,
                         cancellationToken);
 
@@ -52,7 +52,9 @@ namespace Museum.Application.SQRS.Souvenirs.Commands.UpdateSouvenir
                                 Souvenir = souvenir,
                                 SouvenirId = souvenir.Id,
                             };
+                            _dbContext.SouvenirsPhoto.Remove(souvenir.Photo);
                             await _dbContext.SouvenirsPhoto.AddAsync(souvenirPhoto, cancellationToken);
+
                             souvenir.Photo = souvenirPhoto;
 
                             //Удаление старой фотографии

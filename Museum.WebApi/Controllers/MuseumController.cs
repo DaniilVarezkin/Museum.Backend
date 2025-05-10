@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Museum.Application.MuseumEvents.Commands.DeleteMuseumEvent;
 using Museum.Application.SQRS.MuseumEvents.Commands.CreateMuseumEvent;
+using Museum.Application.SQRS.MuseumEvents.Commands.DeleteMuseumEvent;
 using Museum.Application.SQRS.MuseumEvents.Commands.UpdateMuseumEvent;
 using Museum.Application.SQRS.MuseumEvents.Common;
 using Museum.Application.SQRS.MuseumEvents.Queries.GetMuseumEventDetails;
 using Museum.Application.SQRS.MuseumEvents.Queries.GetMuseumEventList;
+using Museum.WebApi.Common;
 using Museum.WebApi.Models;
 
 namespace Museum.WebApi.Controllers
@@ -92,7 +93,7 @@ namespace Museum.WebApi.Controllers
 
             if(museumEventDto.Photos != null && museumEventDto.Photos.Any())
             {
-                command.Photos = await ConvertPhotosAsync(museumEventDto.Photos);
+                command.Photos = await ConverterFormFileToPhotoDto.ConvertRangeAsync(museumEventDto.Photos);
             }
 
             var result = await Mediator.Send(command);
@@ -134,7 +135,7 @@ namespace Museum.WebApi.Controllers
 
             if(updateMuseumEventDto.AddedPhotos != null && updateMuseumEventDto.AddedPhotos.Any())
             {
-                command.AddedPhotos = await ConvertPhotosAsync(updateMuseumEventDto.AddedPhotos);
+                command.AddedPhotos = await ConverterFormFileToPhotoDto.ConvertRangeAsync(updateMuseumEventDto.AddedPhotos);
             }
 
             await Mediator.Send(command);
@@ -167,27 +168,5 @@ namespace Museum.WebApi.Controllers
 
             return NoContent();
         }
-
-
-
-        private async Task<List<PhotoUploadDto>> ConvertPhotosAsync(ICollection<IFormFile> photos)
-        {
-            var result = new List<PhotoUploadDto>();
-            foreach (var photo in photos)
-            {
-                var memoryStream = new MemoryStream();
-                await photo.CopyToAsync(memoryStream);
-                memoryStream.Position = 0;
-
-                result.Add(new PhotoUploadDto
-                {
-                    Content = memoryStream,
-                    Name = photo.FileName,
-                });
-            }
-            return result;
-        }
-
-
     }
 }

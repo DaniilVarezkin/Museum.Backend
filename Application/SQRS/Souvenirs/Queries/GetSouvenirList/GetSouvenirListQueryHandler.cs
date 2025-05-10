@@ -23,7 +23,7 @@ namespace Museum.Application.SQRS.Souvenirs.Queries.GetSouvenirList
         }
         public async Task<SouvenirListVm> Handle(GetSouvenirListQuery query, CancellationToken cancellationToken)
         {
-            var souvenirs = await _dbContext.Souvenirs
+            var souvenirs = await _dbContext.Souvenirs.Include(s => s.Photo)
                 .ProjectTo<SouvenirLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
