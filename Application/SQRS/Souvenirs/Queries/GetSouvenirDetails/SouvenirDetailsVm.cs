@@ -22,7 +22,7 @@ namespace Museum.Application.SQRS.Souvenirs.Queries.GetSouvenirDetails
 
         public void ConfigureMapping(Profile profile)
         {
-            profile.CreateMap<Souvenir, SouvenirLookupDto>()
+            profile.CreateMap<Souvenir, SouvenirDetailsVm>()
                 .ForMember(dto => dto.Id, opt =>
                     opt.MapFrom(souvenir => souvenir.Id))
                 .ForMember(dto => dto.Name, opt =>
