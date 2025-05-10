@@ -106,9 +106,10 @@ namespace Museum.WebApi.Controllers
         /// Creates a new museum event
         /// </summary>
         /// <remarks>
-        /// POST /museum
+        /// PUT /museum
         /// Content-Type: multipart/form-data
         /// Bulk:
+        /// - Id: 79396c57-f07c-4dfa-af5b-b5a7e5aa258fб
         /// - Name: Заголовок один
         /// - Annotation: Аннотация к событию 1
         /// - Description: Описание к событию 1

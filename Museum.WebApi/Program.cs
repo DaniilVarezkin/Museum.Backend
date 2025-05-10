@@ -40,6 +40,8 @@ builder.Services.AddSwaggerGen(config =>
 
     config.IncludeXmlComments(xmlPath);
     config.IncludeXmlComments(@"D:\VSProjects\Museam.Backend\Domain\bin\Debug\net8.0\Museum.Domain.xml");
+
+    config.UseAllOfToExtendReferenceSchemas();
 });
 
 var app = builder.Build();
