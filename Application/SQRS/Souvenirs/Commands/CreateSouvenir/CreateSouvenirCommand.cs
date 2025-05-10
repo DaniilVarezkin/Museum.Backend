@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Museum.Application.SQRS.Souvenirs.Commands
+namespace Museum.Application.SQRS.Souvenirs.Commands.CreateSouvenir
 {
     public class CreateSouvenirCommand : IRequest<Guid>
     {

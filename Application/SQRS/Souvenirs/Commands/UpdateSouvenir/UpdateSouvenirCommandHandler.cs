@@ -1,39 +1,47 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Museum.Application.Common.Exceptions;
 using Museum.Application.Interfaces;
 using Museum.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Museum.Application.SQRS.Souvenirs.Commands
+
+namespace Museum.Application.SQRS.Souvenirs.Commands.UpdateSouvenir
 {
-    public class CreateSouvenirCommandHandler
-        : IRequestHandler<CreateSouvenirCommand, Guid>
+    public class UpdateSouvenirCommandHandler
+        : IRequestHandler<UpdateSouvenirCommand>
     {
         private readonly IMuseumDbContext _dbContext;
         private readonly IFileService _fileService;
-        public CreateSouvenirCommandHandler(IMuseumDbContext dbContext, IFileService fileService) =>
+        public UpdateSouvenirCommandHandler(IMuseumDbContext dbContext, IFileService fileService) =>
             (_dbContext, _fileService) = (dbContext, fileService);
 
-        public async Task<Guid> Handle(CreateSouvenirCommand command,
+        public async Task Handle(UpdateSouvenirCommand command,
             CancellationToken cancellationToken)
         {
-            using(var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken))
+            using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var souvenir = new Souvenir
-                    {
-                        Name = command.Name,
-                        Description = command.Description,
-                        Price = command.Price,
-                        Count = command.Count,
-                    };
+                    var souvenir = await _dbContext.Souvenirs.FirstOrDefaultAsync(souvenir =>
+                            souvenir.Id == command.Id,
+                        cancellationToken);
 
+                    if (souvenir == null)
+                    {
+                        throw new NotFoundException(nameof(Souvenir), command.Id);
+                    }
+
+                    souvenir.Name = command.Name;
+                    souvenir.Description = command.Description;
+                    souvenir.Price = command.Price;
+                    souvenir.Count = command.Count;
+
+
+                    //Тут логика добавления фото сувенира
                     if (command.PhotoDto != null)
                     {
+                        var lastPhotoPath = souvenir?.Photo?.FilePath;
+
                         var filePath = await _fileService.UploadFileAsync(command.PhotoDto.Content, command.PhotoDto.Name, cancellationToken);
                         var trimFilePath = Path.Combine("uploads", "files", Path.GetFileName(filePath));
                         if (filePath != null)
@@ -46,15 +54,19 @@ namespace Museum.Application.SQRS.Souvenirs.Commands
                             };
                             await _dbContext.SouvenirsPhoto.AddAsync(souvenirPhoto, cancellationToken);
                             souvenir.Photo = souvenirPhoto;
+
+                            //Удаление старой фотографии
+                            if (lastPhotoPath != null)
+                            {
+                                await _fileService.DeleteFileAsync(lastPhotoPath, cancellationToken);
+                            }
                         }
+                        
                     }
 
-                    await _dbContext.Souvenirs.AddAsync(souvenir, cancellationToken);
 
                     await _dbContext.SaveChangesAsync(cancellationToken);
                     await transaction.CommitAsync(cancellationToken);
-
-                    return souvenir.Id;
                 }
                 catch (Exception ex)
                 {

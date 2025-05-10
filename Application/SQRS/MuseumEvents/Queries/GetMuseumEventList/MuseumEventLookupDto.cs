@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Museum.Application.Common.Mapping;
-using Museum.Application.MuseumEvents.Queries.GetMuseumEventDetails;
 using Museum.Application.SQRS.MuseumEvents.Common;
 using Museum.Domain;
 
