@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Museum.Application.SQRS.MuseumEvents.Commands.CreateMuseumEvent;
 using Museum.Application.SQRS.MuseumEvents.Commands.DeleteMuseumEvent;
 using Museum.Application.SQRS.MuseumEvents.Commands.UpdateMuseumEvent;
@@ -16,9 +17,10 @@ namespace Museum.WebApi.Controllers
     public class MuseumController : BaseController
     {
         private readonly IMapper _mapper;
+        private readonly ILogger<MuseumController> _logger;
 
-        public MuseumController(IMapper mapper) =>
-            _mapper = mapper;
+        public MuseumController(IMapper mapper, ILogger<MuseumController> logger) =>
+            (_mapper, _logger) = (mapper, logger);
 
 
         /// <summary>
@@ -89,6 +91,7 @@ namespace Museum.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromForm] CreateMuseumEventDto museumEventDto)
         {
+            _logger.LogInformation("Create method started");
             var command = _mapper.Map<CreateMuseumEventCommand>(museumEventDto);
 
             if(museumEventDto.Photos != null && museumEventDto.Photos.Any())
@@ -98,6 +101,7 @@ namespace Museum.WebApi.Controllers
 
             var result = await Mediator.Send(command);
 
+            _logger.LogInformation("Create method completed");
             return Ok(result);
         }
 

@@ -29,6 +29,7 @@ builder.Services.AddCors(options => {
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
+        policy.WithExposedHeaders("content-disposition");
     });
 });
 
@@ -60,12 +61,35 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-
 }
+
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"Request started: {context.Request.Method} {context.Request.Path}");
+    try
+    {
+        await next();
+    }
+    finally
+    {
+        Console.WriteLine($"Request finished: {context.Request.Method} {context.Request.Path} - Status: {context.Response.StatusCode}");
+    }
+});
+
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors("AllowAll");
+app.UseStaticFiles();
+
+// Ваш обработчик исключений ДОЛЬШЕ UseRouting
 app.UseCustomExceptionHandler();
+
+app.MapControllers();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
@@ -73,13 +97,4 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
     options.SwaggerEndpoint("swagger/v1/swagger.json", "Museum API");
 });
-
-app.UseStaticFiles();
-
-app.UseRouting();
-app.UseHttpsRedirection();
-app.UseCors("AllowAll");
-
-app.MapControllers();
-
 app.Run();
